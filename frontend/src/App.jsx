@@ -4,10 +4,9 @@ import Button from './components/Button'
 import './App.css'
 import 'leaflet/dist/leaflet.css'
 import Form from './components/Form';
+import Map from './components/Map';
 
 import React from 'react';
-
-import MapComponent from './components/MapComponent';
 
 function App() {
 
@@ -20,7 +19,7 @@ function App() {
   return (
     <>
       <h1>Vite + React</h1>
-        <MapComponent />
+      <Map/>
         <h1>Form Input</h1>
       <div className="feature">
         <Button onClick={handleButtonClick} type="kabkota" />

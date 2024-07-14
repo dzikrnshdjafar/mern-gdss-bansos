@@ -8,7 +8,7 @@ const routes = require('./routes');
 const app = express();
 const port = process.env.PORT || 5000;
 
-mongoose.connect(config.dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.dbUri);
 
 app.use(cors());
 app.use(bodyParser.json());

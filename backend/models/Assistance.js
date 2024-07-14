@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
 
-const AssistanceSchema = new mongoose.Schema({
-  name: String,
-  address: String,
-  coordinates: {
-    lat: Number,
-    lng: Number
-  },
-  assistanceType: String,
-  status: String
+const assistanceSchema = new mongoose.Schema({
+  // Definisi schema untuk Assistance
+  // Contoh:
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  // Tambahkan sesuai kebutuhan
 });
 
-module.exports = mongoose.model('Assistance', AssistanceSchema);
+module.exports = mongoose.model('Assistance', assistanceSchema);
