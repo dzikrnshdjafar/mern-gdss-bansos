@@ -1,6 +1,7 @@
 #root {
   max-width: 1280px;
-  padding: 1rem;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
 }
 
@@ -27,7 +28,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(3) .logo {
+  a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
@@ -40,81 +41,7 @@
   color: #888;
 }
 
-.feature {
-  text-align: center;
-  padding: 20px;
-}
-
-.button-container {
-  margin: 20px 0;
-}
-
-.btn-primary, .btn-secondary {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-secondary {
-  background-color: #6c757d;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-secondary:hover {
-  background-color: #5a6268;
-}
-
-.form {
-  background: #fff;
-  padding: 20px;
-  margin: 20px auto;
-  width: 300px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-.form h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.form label {
-  display: block;
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.form input[type="text"],
-.form input[type="file"] {
-  width: calc(100% - 20px);
-  padding: 8px 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.form button:hover {
-  background-color: #218838;
-}
-
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

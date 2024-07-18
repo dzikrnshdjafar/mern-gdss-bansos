@@ -1,17 +1,26 @@
 const mongoose = require('mongoose');
 
-const geojsonSchema = new mongoose.Schema({
-  // Definisi schema untuk Geojson
-  // Contoh:
-  type: { type: String, default: 'Feature' },
-  properties: {
-    name: { type: String, required: true },
-    description: { type: String },
+const GeojsonSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Feature'],
+    required: true
   },
   geometry: {
-    type: { type: String, default: 'Polygon' },
-    coordinates: { type: [[[Number]]], required: true },
+    type: {
+      type: String,
+      enum: ['Point', 'LineString', 'Polygon', 'MultiPoint', 'MultiLineString', 'MultiPolygon', 'GeometryCollection'],
+      required: true
+    },
+    coordinates: {
+      type: mongoose.Schema.Types.Mixed, // Allows for an array of numbers or nested arrays
+      required: true
+    }
   },
-});
+  properties: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {}
+  }
+}, { strict: false });
 
-module.exports = mongoose.model('Geojson', geojsonSchema);
+module.exports = mongoose.model('Geojson', GeojsonSchema);
