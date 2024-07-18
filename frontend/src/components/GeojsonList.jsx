@@ -51,16 +51,13 @@ const GeojsonList = ({ geojsons, fetchGeojsonData }) => {
   //   setGeojsonNames(prevGeojsonNames => prevGeojsonNames.filter((_, i) => i !== index));
 
   return (
-    <div>
-      <Card className="max-w-sm">
-        <div className="mb-4 flex items-center justify-between">
-          <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">List Geojson</h5>
-          <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-            View all
-          </a>
+    <div className="px-5">
+      <div className="card bg-primary text-primary-content w-96">
+       <div className="card-body text-center">
+        <h2 className="card-title">List Geojson</h2>
         </div>
         <div className="flow-root">
-          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          <ul className="divide-y px-5 dark:divide-gray-700">
             {geojsons.map((geojson) => (
             <li className="py-3 sm:py-4" key={geojson._id}>
               <GeojsonItem geojson={geojson} fetchGeojsonData={fetchGeojsonData}/>
@@ -68,7 +65,7 @@ const GeojsonList = ({ geojsons, fetchGeojsonData }) => {
             ))}
           </ul>
         </div>
-      </Card>
+    </div>
     </div>
   );
 };

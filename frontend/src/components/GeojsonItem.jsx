@@ -26,11 +26,11 @@ const GeojsonItem = ({ geojson, fetchGeojsonData }) => {
     
         <div className="flex items-center space-x-4">
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-gray-900 dark:text-white">{geojson.properties.NAMOBJ}</p>
+                <h>{geojson.properties.NAMOBJ}</h>
               </div>
-              <Button onClick={handleDelete} color="failure">
+              <button onClick={handleDelete} className='btn btn-error'>
                 Delete
-              </Button>
+              </button>
             </div>
   );
 };

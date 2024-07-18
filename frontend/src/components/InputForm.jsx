@@ -1,9 +1,8 @@
-import { FileInput, Label, Button, TextInput } from "flowbite-react";
+import { FileInput, Label, Button, TextInput, Card } from "flowbite-react";
 import React, { useState } from 'react';
 import axios from 'axios';
-import GeojsonList from './GeojsonList'; // Pastikan path sesuai dengan struktur proyek Anda
 
-export function Kabkota({fetchGeojsonData}) {
+export function InputForm({fetchGeojsonData}) {
   const [file, setFile] = useState(null);
   const [NAMOBJ, setNAMOBJ] = useState('');
   const [geojsonNames, setGeojsonNames] = useState([]); // State untuk menyimpan daftar nama GeoJSON
@@ -45,22 +44,20 @@ export function Kabkota({fetchGeojsonData}) {
   };
 
   return (
-    <div className="flex flex-wrap gap-4">
+      <div className="card bg-neutral text-neutral-content w-96">
+      <div className="card-body">
+        
       <form onSubmit={handleSubmit} className="w-full max-w-md">
-        <div className="mb-4">
-          <Label htmlFor="file" value="Upload file" />
-          <FileInput id="file" helperText="A profile picture is useful to confirm you are logged into your account" type="file" accept=".geojson" onChange={handleFileChange} />
+          <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs mb-4" onChange={handleFileChange} />
+          Input Nama Geojson
+          <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs mb-4" value={NAMOBJ} onChange={(e) => setNAMOBJ(e.target.value)}/>
+        <div className="card-actions justify-end">
+        <button className="btn btn-primary" type="submit">Simpan</button>
         </div>
-        
-        <div className="mb-4">
-          <Label htmlFor="namobj" value="Nama GeoJSON" />
-          <TextInput id="namobj" type="text" value={NAMOBJ} onChange={(e) => setNAMOBJ(e.target.value)} placeholder="Enter GeoJSON name" />
-        </div>
-        
-        <Button pill type="submit">Upload</Button>
       </form>
   
       {/* <GeojsonList geojsonNames={geojsonNames} setGeojsonNames={setGeojsonNames} /> */}
+      </div>
     </div>
   );
 }
