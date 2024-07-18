@@ -1,37 +1,47 @@
 import axios from 'axios';
-import {Button} from 'flowbite-react'
 
-const GeojsonItem = ({ geojson, fetchGeojsonData }) => {
-  const handleDelete = async () => {
+const GeojsonItem = ({ geojsons, fetchGeojsonData }) => {
+
+  const handleDelete = async (geojsonId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/geojsons/${geojson._id}`);
+      await axios.delete(`http://localhost:5000/api/geojsons/${geojsonId}`);
       fetchGeojsonData();
     } catch (err) {
       console.error('Error deleting Geojson:', err.message); // Logging the error message
     }
   };
 
-  const handleToggleComplete = async () => {
-    try {
-      await axios.put(`http://localhost:5000/api/geojsons/${geojson._id}`, {
-        ...geojson,
-      });
-      fetchGeojsonData();
-    } catch (err) {
-      console.error('Error toggling geojson complete:', err.message); // Logging the error message
-    }
-  };
-
   return (
-    
-        <div className="flex items-center space-x-4">
-              <div className="min-w-0 flex-1">
-                <h>{geojson.properties.NAMOBJ}</h>
-              </div>
-              <button onClick={handleDelete} className='btn btn-error'>
-                Delete
-              </button>
-            </div>
+    <div className="h-96 overflow-x-auto px-5">
+      <table className="table table-pin-rows">
+        <thead>
+          <tr>
+            <td>Nama</td>
+            <td>Tipe</td>
+            <td>Aksi</td>
+          </tr>
+        </thead>
+        <tbody>
+          {geojsons.map((geojson) => (
+            <tr key={geojson._id}>
+              <td>
+                <div className="flex items-center space-x-4">
+                  <div className="min-w-1 flex-1">
+                    <h2>{geojson.properties.NAMOBJ}</h2>
+                  </div>
+                </div>
+              </td>
+              <td>{geojson.geometry.type}</td>
+              <td>
+                <button onClick={() => handleDelete(geojson._id)} className='btn btn-error btn-sm'>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

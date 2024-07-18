@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const EditGeojson = () => {
-  const [geojsons, setGeojsons] = useState([]);
+const EditGeojson = ({geojsons, setGeojsons}) => {
   const [selectedGeojson, setSelectedGeojson] = useState(null);
   const [name, setName] = useState('');
-  const [luas, setLuas] = useState(''); // Tambahkan state untuk LUAS
+  const [luas, setLuas] = useState('');
   const queryParams = new URLSearchParams(location.search);
   const geojsonId = queryParams.get('id');
 
@@ -16,8 +15,8 @@ const EditGeojson = () => {
         if (geojsonId) {
           const geojson = response.data.find(g => g._id === geojsonId);
           setSelectedGeojson(geojson);
-          setName(geojson?.properties.NAMOBJ || ''); // Menggunakan NAMOBJ sebagai nama
-          setLuas(geojson?.properties.LUAS || ''); // Menggunakan LUAS
+          setName(geojson?.properties.NAMOBJ || '');
+          setLuas(geojson?.properties.LUAS || '');
         }
       })
       .catch(error => console.error('Error fetching Geojsons:', error));
@@ -27,8 +26,8 @@ const EditGeojson = () => {
     const selectedId = e.target.value;
     const geojson = geojsons.find(g => g._id === selectedId);
     setSelectedGeojson(geojson);
-    setName(geojson?.properties.NAMOBJ || ''); // Menggunakan NAMOBJ sebagai nama
-    setLuas(geojson?.properties.LUAS || ''); // Menggunakan LUAS
+    setName(geojson?.properties.NAMOBJ || '');
+    setLuas(geojson?.properties.LUAS || '');
   };
 
   const handleSubmit = (e) => {
@@ -36,7 +35,7 @@ const EditGeojson = () => {
     if (!selectedGeojson) return;
 
     axios.put(`http://localhost:5000/api/geojsons/${selectedGeojson._id}`, {
-      properties: { ...selectedGeojson.properties, NAMOBJ: name, LUAS: luas }, // Sertakan LUAS
+      properties: { ...selectedGeojson.properties, NAMOBJ: name, LUAS: luas },
     })
       .then(() => {
         alert('Geojson updated successfully!');
@@ -49,17 +48,16 @@ const EditGeojson = () => {
   };
 
   return (
-    <div className="card bg-neutral text-neutral-content w-96">
-        <div className="card-body items-center">
-          <h2>Edit Geojson</h2>
+    <>
+          <h1><strong>Edit Geojson</strong></h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Select Geojson:</label>
-          <select className="select select-primary w-full max-w-xs mt-1" value={selectedGeojson?._id || ''} onChange={handleGeojsonChange}>
-            <option disabled selected value="">Select a Geojson</option>
+          <label>Pilih Geojson</label>
+          <select className="select select-accent w-full max-w-xs mt-1" value={selectedGeojson?._id || ''} onChange={handleGeojsonChange}>
+            <option disabled value="">Pilih Geojson</option>
             {geojsons.map(geojson => (
               <option key={geojson._id} value={geojson._id}>
-                {geojson.properties.NAMOBJ || 'Unnamed GeoJSON'} {/* Menggunakan NAMOBJ sebagai nama */}
+                {geojson.properties.NAMOBJ || 'Unnamed GeoJSON'}
               </option>
             ))}
           </select>
@@ -67,27 +65,27 @@ const EditGeojson = () => {
         {selectedGeojson && (
           <>
             <div className='mt-2'>
-              <label>Geojson Name:</label>
-              <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs mb-4 mt-1"
-                value={name}
+              <label>Nama Geojson</label>
+              <input type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs mb-4 mt-1"
+                value={name} required
                 onChange={(e) => setName(e.target.value)}
-              />
+                />
             </div>
             <div>
-              <label>Geojson LUAS:</label>
-              <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs mb-4 mt-1"
-                value={luas}
+              <label>Input Luas Wilayah</label>
+              <input type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs mb-4 mt-1"
+                value={luas} required
                 onChange={(e) => setLuas(e.target.value)}
-              />
+                />
             </div>
           </>
         )}
           <div className="card-actions justify-end">
-        <button type="submit" className='btn btn-warning'disabled={!selectedGeojson}>Update</button>
+        <button type="submit" className='btn btn-warning' disabled={!selectedGeojson}>Update</button>
     </div>
       </form>
-    </div>
-    </div>
+        </>
+
   );
 };
 
